@@ -15,19 +15,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<PostBloc>(
+          create: (BuildContext context) => PostBloc()..add(FetchPost()),
+        ),
+        BlocProvider<FormBloc>(
+          create: (BuildContext context) => FormBloc(),
+        ),
+      ],
+      child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: MultiBlocProvider(providers: [
-          BlocProvider<PostBloc>(
-            create: (BuildContext context) => PostBloc()..add(FetchPost()),
-          ),
-          BlocProvider<FormBloc>(
-            create: (BuildContext context) => FormBloc(),
-          ),
-        ], child: HomeScreen()));
+        home: HomeScreen(),
+      ),
+    );
   }
 }

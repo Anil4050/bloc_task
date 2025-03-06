@@ -1,15 +1,15 @@
-abstract class NewState {}
+abstract class FormState {}
 
-class NewInitial extends NewState {}
+class FormInitial extends FormState {}
 
-class NewLoading extends NewState {}
+class FormLoading extends FormState {}
 
-class NewLoaded extends NewState {
-  final List<dynamic> users;
-  NewLoaded(this.users);
+class FormSuccess extends FormState {
+  final String message;
+  FormSuccess(this.message);
 }
 
-class NewError extends NewState {
-  final String message;
-  NewError(this.message);
+class FormError extends FormState {
+  final String error;
+  FormError(this.error);
 }
