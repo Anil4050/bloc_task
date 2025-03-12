@@ -2,6 +2,8 @@ import 'package:api_calling/Screens/PostScreens/post_screen.dart';
 import 'package:api_calling/Screens/form_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'Screens/PostScreens/LocalCrud/local_crud_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -47,6 +49,24 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.amber,
                       borderRadius: BorderRadius.circular(10.0)),
                   child: Center(child: Text("Post API Calling"))),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LocalCrudScreen()),
+                );
+              },
+              child: Container(
+                  height: 80,
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(10.0)),
+                  child: Center(child: Text("Local Database Crud"))),
             )
           ],
         ),

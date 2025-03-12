@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class ApiService {
   static String url = 'https://jsonplaceholder.typicode.com/posts';
   static Future<List<dynamic>> fetchPosts() async {
-    // String url = 'https://jsonplaceholder.typicode.com/posts';
+    
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200 || response.statusCode == 201) {
