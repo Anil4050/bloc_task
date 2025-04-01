@@ -1,6 +1,6 @@
 import 'package:api_calling/Bloc/PostBloc/post_event.dart';
 import 'package:api_calling/Bloc/PostBloc/post_state.dart';
-import 'package:api_calling/api_service.dart';
+import 'package:api_calling/Services/api_service.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

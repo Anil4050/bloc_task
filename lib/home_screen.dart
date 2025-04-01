@@ -1,4 +1,5 @@
 import 'package:api_calling/Screens/PostScreens/post_screen.dart';
+import 'package:api_calling/Screens/auth_screen.dart';
 import 'package:api_calling/Screens/form_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +68,25 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.amber,
                       borderRadius: BorderRadius.circular(10.0)),
                   child: Center(child: Text("Local Database Crud"))),
-            )
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AuthScreen()),
+                );
+              },
+              child: Container(
+                  height: 80,
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(10.0)),
+                  child: Center(child: Text("Auth with email"))),
+            ),
           ],
         ),
       ),

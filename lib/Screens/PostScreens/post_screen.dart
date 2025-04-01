@@ -75,10 +75,9 @@ class PostScreen extends StatelessWidget {
                         context.read<PostBloc>().add((FetchPost()));
                       },
                       icon: Icon(Icons.search))),
-
-                      onChanged: (value){
-                        context.read<PostBloc>().add(SearchPost(value));
-                      },
+              onChanged: (value) {
+                context.read<PostBloc>().add(SearchPost(value));
+              },
             ),
           ),
 

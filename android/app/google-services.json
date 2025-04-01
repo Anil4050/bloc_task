@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "595875344046",
+    "firebase_url": "https://blocfirebasesir-default-rtdb.firebaseio.com",
+    "project_id": "blocfirebasesir",
+    "storage_bucket": "blocfirebasesir.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595875344046:android:b12db229eb69412173c73f",
+        "android_client_info": {
+          "package_name": "com.example.api_calling"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeKRAaJX2JZHMX7WoRcfApz4kBYruAfXo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
