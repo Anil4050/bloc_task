@@ -1,35 +1,47 @@
-import 'package:api_calling/Bloc/AuthBloc/auth_event.dart';
-import 'package:api_calling/Bloc/AuthBloc/auth_state.dart';
-import 'package:api_calling/Services/auth_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'auth_event.dart';
+import 'auth_state.dart';
+import '../../Services/auth_service.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthService _authService;
 
   AuthBloc(this._authService) : super(AuthInitial()) {
-    on<SignInWithEmail>((event, state) async {
+    on<SignInWithEmail>((event, emit) async {
       emit(AuthLoading());
-      final user = _authService.signinWithEmail(event.email, event.pass);
+      User? user = await _authService.signInWithEmail(event.email, event.pass);
 
       if (user != null) {
         emit(Authenticated(user));
       } else {
-        emit(UnAuthenticated());
+        emit(AuthError("Email sign-in failed"));
       }
     });
 
-    on<RegisterWithEmail>((event, state) async {
+    on<RegisterWithEmail>((event, emit) async {
       emit(AuthLoading());
-      final user = _authService.registerWithEmail(event.email, event.pass);
+      User? user = await _authService.registerWithEmail(event.email, event.pass);
 
       if (user != null) {
         emit(Authenticated(user));
       } else {
-        emit(UnAuthenticated());
+        emit(AuthError("Email registration failed"));
       }
     });
 
-    on<SignOut>((event, state) async {
+    on<SignInWithGoogle>((event, emit) async {
+      emit(AuthLoading());
+      User? user = await _authService.signInWithGoogle();
+
+      if (user != null) {
+        emit(Authenticated(user));
+      } else {
+        emit(AuthError("Google sign-in failed"));
+      }
+    });
+
+    on<SignOut>((event, emit) async {
       await _authService.signOut();
       emit(UnAuthenticated());
     });
