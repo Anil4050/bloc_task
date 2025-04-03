@@ -1,8 +1,9 @@
 import 'package:api_calling/Screens/PostScreens/post_screen.dart';
 import 'package:api_calling/Screens/auth_screen.dart';
 import 'package:api_calling/Screens/form_screen.dart';
+import 'package:api_calling/Screens/product_screen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:glassmorphism/glassmorphism.dart';
 import 'Screens/PostScreens/LocalCrud/local_crud_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,81 +12,125 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.7,
-        width: MediaQuery.of(context).size.width,
+      body: Stack(
+        children: [
+          /// Background Gradient
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF7E99A3), Color(0xFFA5BFCC)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+          ),
+
+          /// Main Content
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  /// App Title
+                  const Text(
+                    "Dashboard",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  /// Glassmorphic Menu Cards
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 15,
+                      mainAxisSpacing: 15,
+                      children: [
+                        _buildMenuCard(
+                          context,
+                          "Get API",
+                          Icons.cloud_download,
+                          PostScreen(),
+                        ),
+                        _buildMenuCard(
+                          context,
+                          "Post API",
+                          Icons.cloud_upload,
+                          FormScreen(),
+                        ),
+                        _buildMenuCard(
+                          context,
+                          "Local DB",
+                          Icons.storage,
+                          LocalCrudScreen(),
+                        ),
+                        _buildMenuCard(
+                          context,
+                          "Auth",
+                          Icons.lock,
+                          AuthScreen(),
+                        ),
+                        _buildMenuCard(
+                          context,
+                          "Products",
+                          Icons.shopping_bag,
+                          ProductScreen(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Glassmorphism Card Widget
+  Widget _buildMenuCard(BuildContext context, String title, IconData icon, Widget screen) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
+      },
+      child: GlassmorphicContainer(
+        width: double.infinity,
+        height: 120,
+        borderRadius: 20,
+        blur: 10,
+        alignment: Alignment.center,
+        border: 2,
+        linearGradient: LinearGradient(
+          colors: [
+            Colors.white.withOpacity(0.2),
+            Colors.white.withOpacity(0.1),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderGradient: LinearGradient(
+          colors: [
+            Colors.white.withOpacity(0.3),
+            Colors.white.withOpacity(0.1),
+          ],
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PostScreen()),
-                );
-              },
-              child: Container(
-                  height: 80,
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(10.0)),
-                  child: Center(child: Text("Get API Calling"))),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => FormScreen()),
-                );
-              },
-              child: Container(
-                  height: 80,
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(10.0)),
-                  child: Center(child: Text("Post API Calling"))),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LocalCrudScreen()),
-                );
-              },
-              child: Container(
-                  height: 80,
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(10.0)),
-                  child: Center(child: Text("Local Database Crud"))),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AuthScreen()),
-                );
-              },
-              child: Container(
-                  height: 80,
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(10.0)),
-                  child: Center(child: Text("Auth with email"))),
+            Icon(icon, size: 40, color: Colors.white),
+            const SizedBox(height: 8),
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
