@@ -1,9 +1,11 @@
 import 'package:api_calling/Screens/PostScreens/post_screen.dart';
 import 'package:api_calling/Screens/auth_screen.dart';
 import 'package:api_calling/Screens/form_screen.dart';
+import 'package:api_calling/Screens/hydrated_bloc_screen.dart';
 import 'package:api_calling/Screens/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
+
 import 'Screens/PostScreens/LocalCrud/local_crud_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -60,13 +62,13 @@ class HomeScreen extends StatelessWidget {
                           context,
                           "Post API",
                           Icons.cloud_upload,
-                          FormScreen(),
+                          const FormScreen(),
                         ),
                         _buildMenuCard(
                           context,
                           "Local DB",
                           Icons.storage,
-                          LocalCrudScreen(),
+                          const LocalCrudScreen(),
                         ),
                         _buildMenuCard(
                           context,
@@ -79,6 +81,12 @@ class HomeScreen extends StatelessWidget {
                           "Products",
                           Icons.shopping_bag,
                           ProductScreen(),
+                        ),
+                        _buildMenuCard(
+                          context,
+                          "Counter Hydrated",
+                          Icons.shopping_bag,
+                          const HydratedBlocScreen(),
                         ),
                       ],
                     ),
@@ -93,10 +101,12 @@ class HomeScreen extends StatelessWidget {
   }
 
   /// Glassmorphism Card Widget
-  Widget _buildMenuCard(BuildContext context, String title, IconData icon, Widget screen) {
+  Widget _buildMenuCard(
+      BuildContext context, String title, IconData icon, Widget screen) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => screen));
       },
       child: GlassmorphicContainer(
         width: double.infinity,

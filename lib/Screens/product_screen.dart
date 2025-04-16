@@ -1,9 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:api_calling/Bloc/ProductBloc/product_event.dart';
 import 'package:api_calling/Bloc/ProductBloc/product_state.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../Bloc/ProductBloc/product_bloc.dart';
-import '../../Models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../Bloc/ProductBloc/product_bloc.dart';
@@ -29,7 +27,7 @@ class _ProductScreenState extends State<ProductScreen> {
       }
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,21 +76,29 @@ class _ProductScreenState extends State<ProductScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              product.title,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              height: 40,
+                              child: Text(
+                                product.title,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
-                            Text(
-                              "\$${product.price}",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color:
-                                    Colors.green, // Highlighting price in green
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              height: 20,
+                              child: Text(
+                                "\$${product.price}",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors
+                                      .green, // Highlighting price in green
+                                ),
                               ),
                             ),
                           ],

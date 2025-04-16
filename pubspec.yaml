@@ -41,6 +41,8 @@ dependencies:
   firebase_auth: ^5.5.2
   google_sign_in: ^6.3.0
   glassmorphism: ^3.0.0
+  hydrated_bloc: ^10.0.0
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
