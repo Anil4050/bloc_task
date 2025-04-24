@@ -2,6 +2,7 @@ import 'package:api_calling/Screens/PostScreens/post_screen.dart';
 import 'package:api_calling/Screens/auth_screen.dart';
 import 'package:api_calling/Screens/form_screen.dart';
 import 'package:api_calling/Screens/hydrated_bloc_screen.dart';
+import 'package:api_calling/Screens/notification_screen.dart';
 import 'package:api_calling/Screens/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
@@ -87,6 +88,12 @@ class HomeScreen extends StatelessWidget {
                           "Counter Hydrated",
                           Icons.shopping_bag,
                           const HydratedBlocScreen(),
+                        ),
+                        _buildMenuCard(
+                          context,
+                          "Notification",
+                          Icons.shopping_bag,
+                          const NotificationScreen(),
                         ),
                       ],
                     ),

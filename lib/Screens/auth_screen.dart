@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:api_calling/Bloc/AuthBloc/auth_bloc.dart';
 import 'package:api_calling/Bloc/AuthBloc/auth_event.dart';
 import 'package:api_calling/Bloc/AuthBloc/auth_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthScreen extends StatelessWidget {
   AuthScreen({super.key});
@@ -19,17 +19,15 @@ class AuthScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is Authenticated) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Welcome ${state.user.email}'))
-            );
+                SnackBar(content: Text('Welcome ${state.user.email}')));
           } else if (state is AuthError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message))
-            );
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         builder: (context, state) {
           if (state is AuthLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is Authenticated) {
             return Center(
               child: Column(
@@ -37,30 +35,38 @@ class AuthScreen extends StatelessWidget {
                 children: [
                   Text("Logged in as ${state.user.email}"),
                   ElevatedButton(
-                    onPressed: () => context.read<AuthBloc>().add(SignOut()),
-                    child: Text("Sign Out")
-                  ),
+                      onPressed: () => context.read<AuthBloc>().add(SignOut()),
+                      child: const Text("Sign Out")),
                 ],
               ),
             );
           }
 
           return Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                TextField(controller: _emailController, decoration: InputDecoration(labelText: "Email")),
-                TextField(controller: _passwordController, decoration: InputDecoration(labelText: "Password"), obscureText: true),
-                SizedBox(height: 16),
+                TextField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(labelText: "Email")),
+                TextField(
+                    controller: _passwordController,
+                    decoration: const InputDecoration(labelText: "Password"),
+                    obscureText: true),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
                     final email = _emailController.text.trim();
                     final pass = _passwordController.text.trim();
 
                     if (isLogin) {
-                      context.read<AuthBloc>().add(SignInWithEmail(email, pass));
+                      context
+                          .read<AuthBloc>()
+                          .add(SignInWithEmail(email, pass));
                     } else {
-                      context.read<AuthBloc>().add(RegisterWithEmail(email, pass));
+                      context
+                          .read<AuthBloc>()
+                          .add(RegisterWithEmail(email, pass));
                     }
                   },
                   child: Text(isLogin ? "Login" : "Register"),
@@ -69,7 +75,7 @@ class AuthScreen extends StatelessWidget {
                   onPressed: () {
                     context.read<AuthBloc>().add(SignInWithGoogle());
                   },
-                  child: Text("Sign in with Google"),
+                  child: const Text("Sign in with Google"),
                 ),
               ],
             ),
